@@ -35,9 +35,16 @@ sudo apk add aws-cli
 sudo apk add kubectl
 ```
 
+## 5. Install Python & Pip (Optional for local testing)
+```bash
+sudo apk add python3 py3-pip
+```
+
 ## Verification
 ```bash
 terraform version
 aws --version
 kubectl version
+python3 --version
+pip --version
 ```
