@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-app
+  namespace: argocd
+spec:
+  project: default
+  
+  # Source: Git repository
+  source:
+    repoURL: https://github.com/miafo1/gitops-multicloud-pipeline.git
+    targetRevision: main
+    path: k8s/manifests
+  
+  # Destination: EKS cluster
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  
+  # Sync policy: Automated with self-heal and prune
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

@@ -35,7 +35,16 @@ sudo apk add aws-cli
 sudo apk add kubectl
 ```
 
-## 5. Install Python & Pip (Optional for local testing)
+## 5. Install Helm
+```bash
+# Download Helm binary
+wget https://get.helm.sh/helm-v3.13.3-linux-amd64.tar.gz
+tar -zxvf helm-v3.13.3-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+rm -rf linux-amd64 helm-v3.13.3-linux-amd64.tar.gz
+```
+
+## 6. Install Python & Pip (Optional for local testing)
 ```bash
 sudo apk add python3 py3-pip
 # Create a virtual environment to avoid PEP 668 errors
@@ -50,6 +59,7 @@ pip install -r app/requirements.txt
 terraform version
 aws --version
 kubectl version
+helm version
 python3 --version
 pip --version
 ```
