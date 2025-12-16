@@ -71,12 +71,15 @@ echo "This will take ~10-15 minutes..."
 
 cd infra/live/dev/aws
 
-if [ -f ".terraform/terraform.tfstate" ]; then
+if [ -f ".terraform/terraform.tfstate" ] || [ -f "main.tf" ]; then
+    echo "Initializing Terraform..."
+    terraform init
+    
     echo "Running terraform destroy..."
     terraform destroy -auto-approve
     echo "✅ AWS infrastructure destroyed"
 else
-    echo "ℹ️  No Terraform state found, skipping..."
+    echo "ℹ️  No Terraform configuration found, skipping..."
 fi
 
 echo ""
@@ -86,12 +89,15 @@ echo "=========================================="
 
 cd ../../bootstrap
 
-if [ -f ".terraform/terraform.tfstate" ]; then
+if [ -f ".terraform/terraform.tfstate" ] || [ -f "main.tf" ]; then
+    echo "Initializing Terraform..."
+    terraform init
+    
     echo "Destroying S3 and DynamoDB..."
     terraform destroy -auto-approve
     echo "✅ Bootstrap resources destroyed"
 else
-    echo "ℹ️  No bootstrap state found, skipping..."
+    echo "ℹ️  No bootstrap configuration found, skipping..."
 fi
 
 echo ""
