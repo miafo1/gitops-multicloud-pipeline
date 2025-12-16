@@ -12,8 +12,17 @@ sudo apk add curl unzip
 
 ## 2. Install Terraform
 ```bash
-# Install from the community repository
-sudo apk add terraform --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+# Download the binary (more reliable than apk for this package)
+# Check for latest version at https://developer.hashicorp.com/terraform/downloads
+export TERRAFORM_VERSION="1.9.5"
+wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+# Unzip and move to /usr/local/bin
+unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+
+# Clean up
+rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ```
 
 ## 3. Install AWS CLI
