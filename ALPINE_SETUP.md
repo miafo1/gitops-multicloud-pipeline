@@ -38,6 +38,11 @@ sudo apk add kubectl
 ## 5. Install Python & Pip (Optional for local testing)
 ```bash
 sudo apk add python3 py3-pip
+# Create a virtual environment to avoid PEP 668 errors
+python3 -m venv venv
+source venv/bin/activate
+# Now you can install requirements
+pip install -r app/requirements.txt
 ```
 
 ## Verification
